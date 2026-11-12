@@ -95,7 +95,10 @@ the site stays unchanged.
 - `src/layouts/Layout.astro`: the page shell: meta tags, fonts, the CMS script, the header
   and footer
 - `src/components/`: the header, footer, and the pieces used on more than one page
-  (`Hours`, `SeasonalList`, `MenuSection`, `Stamp`)
+  (`Hours`, `SeasonalList`, `MenuSection`)
+- `public/images/logo.svg` and `logo-light.svg`: the round stamp logo, dark for the header
+  and light for the footer. The favicons in `public/` are a simpler version of it, since
+  the lettering is unreadable at icon sizes.
 - `src/lib/business.ts`: the café's name, address, phone number, hours and the menu links
 - `src/lib/site.ts`: the site's address, and whether this is a staging build
 - `src/styles/global.css`: Tailwind, the colours and fonts, and a few shared classes

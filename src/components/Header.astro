@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import Stamp from "./Stamp.astro";
 import { business, navLinks } from "../lib/business";
 
 const current = Astro.url.pathname;
@@ -12,7 +11,7 @@ const current = Astro.url.pathname;
 <header class="sticky top-0 z-40 border-b border-ink/15 bg-paper/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <a href="/" class="flex items-center gap-3 text-ink">
-            <Stamp class="h-11 w-11 text-ink" />
+            <img src="/images/logo.svg" alt="" class="h-11 w-11" />
             <span class="flex flex-col leading-none">
                 <span class="font-serif text-2xl font-semibold tracking-tight">Wrenwick</span>
                 <span class="label mt-1 text-[0.62rem] text-ink-soft">Roast House</span>

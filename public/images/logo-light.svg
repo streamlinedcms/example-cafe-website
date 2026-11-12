@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Wrenwick Roast House: the roaster's round stamp, the shop name set around a
+       circle with a coffee bean in the middle. Light, for dark backgrounds. -->
+  <defs>
+    <path id="ring" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/>
+  </defs>
+  <circle cx="60" cy="60" r="57" fill="none" stroke="#e8dcc6" stroke-width="1.5"/>
+  <circle cx="60" cy="60" r="34" fill="none" stroke="#e8dcc6" stroke-width="1"/>
+  <text font-family="Inter, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#e8dcc6">
+    <textPath href="#ring" textLength="274" lengthAdjust="spacing">WRENWICK ROAST HOUSE · EST. 2014 ·</textPath>
+  </text>
+  <g transform="translate(60 60) rotate(-28)">
+    <ellipse rx="12" ry="17" fill="#e8dcc6"/>
+    <path d="M0,-15 C-5,-6 5,6 0,15" fill="none" stroke="#2a1c13" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+</svg>
