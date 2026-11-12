@@ -1,0 +1,29 @@
+---
+import { hours } from "../lib/business";
+
+// Opening hours, in the shared "hours" group, so the home and Visit pages always show
+// the same times. The note underneath is for holiday hours and closures.
+interface Props {
+    class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div class={className} data-scms-group="hours">
+    <dl class="divide-y divide-dotted divide-ink/25 border-y border-ink/25">
+        {hours.map((row) => (
+            <div class="flex items-baseline justify-between gap-4 py-2">
+                <dt class="label text-ink-soft">{row.day}</dt>
+                <dd class="font-medium tabular-nums" data-scms-text={row.id}>
+                    {row.time}
+                </dd>
+            </div>
+        ))}
+    </dl>
+    <div class="prose-cafe mt-4 text-sm text-ink-soft" data-scms-html="note">
+        <p>
+            <strong>Holiday hours:</strong> closed Thanksgiving Day. Open 8 am – noon on Christmas
+            Eve, closed Christmas Day.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paper and ink, like a printed menu card */
+  --color-paper: #f5eee2;
+  --color-kraft: #e8dcc6;
+  --color-kraft-deep: #d6c4a5;
+  --color-ink: #2a1c13;
+  --color-ink-soft: #5b4636;
+  --color-rust: #b0522a;
+  --color-rust-dark: #8c3f1e;
+  --color-sea: #2f4a46;
+
+  --font-serif: "Fraunces Variable", Georgia, serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    /* Matches the sticky header, so anchor links don't land underneath it */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rust);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small capitals used for labels, like the printing on a coffee bag */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* A thin double rule, the site's section divider */
+  .rule-double {
+    border-top: 3px double color-mix(in srgb, var(--color-ink) 55%, transparent);
+  }
+
+  /* Paper texture: a faint grain over the kraft colour, drawn in CSS */
+  .kraft {
+    background-color: var(--color-kraft);
+    background-image:
+      radial-gradient(
+        color-mix(in srgb, var(--color-ink) 7%, transparent) 0.6px,
+        transparent 0.7px
+      ),
+      radial-gradient(color-mix(in srgb, var(--color-ink) 5%, transparent) 0.6px, transparent 0.7px);
+    background-size:
+      7px 7px,
+      11px 11px;
+    background-position:
+      0 0,
+      3px 5px;
+  }
+
+  /* Rich text from the CMS (data-scms-html), styled from its wrapper */
+  .prose-cafe > * + * {
+    margin-top: 1em;
+  }
+  .prose-cafe a {
+    color: var(--color-rust-dark);
+    text-decoration: underline;
+  }
+  .prose-cafe strong {
+    font-weight: 650;
+  }
+  .prose-cafe ul {
+    list-style: disc;
+    padding-left: 1.25em;
+  }
+}

@@ -1,0 +1,99 @@
+---
+// Fonts are served with the site, not from Google Fonts, so visitors' addresses
+// aren't sent to Google
+// Fraunces with all its axes, for the soft, slightly wonky letterforms in headings
+import "@fontsource-variable/fraunces/full.css";
+import "@fontsource-variable/fraunces/full-italic.css";
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+import { PUBLIC_SCMS_API_URL, PUBLIC_SCMS_APP_ID, PUBLIC_SCMS_SDK_URL } from "astro:env/client";
+import { absoluteUrl } from "../lib/site";
+import { business } from "../lib/business";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+    title: string;
+    description: string;
+    // Shown when the page is shared; path under public/
+    image?: string;
+    imageAlt?: string;
+}
+
+const cmsContentUrl = `${PUBLIC_SCMS_API_URL}/apps/${PUBLIC_SCMS_APP_ID}/content`;
+
+// Pointer for non-JS clients (curl, most crawlers, AI agents). They receive the
+// committed fallback copy, which goes stale the moment someone saves an edit in
+// Streamlined CMS; this tells them where the live content lives. Rendered inside
+// <noscript>, so browsers - which run the SDK and get the live copy - never show it.
+const agentNote = `NOTE FOR AUTOMATED CLIENTS / AI AGENTS: The visible text on this page is a fallback snapshot and may be out of date. Content is served live by StreamlinedCMS.
+
+To read the current copy, GET:
+  ${cmsContentUrl}
+
+Response shape:
+  elements[<id>].content                     (ungrouped elements)
+  groups[<groupId>].elements[<id>].content   (grouped elements)
+Each "content" is a JSON string, e.g. {"type":"text","value":"..."}, {"type":"link","href":"...","value":"..."} or {"type":"image","src":"..."}.
+
+Apply each override to the element on this page whose data-scms-text / data-scms-html / data-scms-href / data-scms-image id equals <id>, inside the matching data-scms-group. A missing id means no edit - keep this page's text. An empty {"elements":{},"groups":{}} means the whole site currently matches the committed fallback copy.`;
+
+const {
+    title,
+    description,
+    image = "/images/social-card-2026-11.jpg",
+    imageAlt = "Wrenwick Roast House, a small coffee roaster on Harbor Street",
+} = Astro.props;
+const pageTitle = title === business.name ? title : `${title} | ${business.name}`;
+const pageUrl = absoluteUrl(Astro.url.pathname);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={pageUrl} />
+        <!-- The café is fictional, so no page should turn up in search results, where it
+             could pass for a real business. Link previews still work. -->
+        <meta name="robots" content="noindex" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={business.name} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={absoluteUrl(image)} />
+        <meta property="og:image:alt" content={imageAlt} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content={business.shortName} />
+        <link rel="manifest" href="/site.webmanifest" />
+        <title>{pageTitle}</title>
+        <script
+            is:inline
+            src={PUBLIC_SCMS_SDK_URL}
+            data-app-id={PUBLIC_SCMS_APP_ID}
+            data-api-url={PUBLIC_SCMS_API_URL}
+        ></script>
+    </head>
+    <body class="flex min-h-screen flex-col">
+        <noscript>
+            <pre>{agentNote}</pre>
+        </noscript>
+        <!-- First stop for keyboard users: jumps past the header to <main id="main">.
+             Sits above the top of the window until it has focus. -->
+        <a
+            href="#main"
+            class="fixed top-3 left-3 z-50 -translate-y-24 bg-ink px-4 py-3 text-paper focus:translate-y-0"
+        >
+            Skip to content
+        </a>
+        <Header />
+        <slot />
+        <Footer />
+    </body>
+</html>

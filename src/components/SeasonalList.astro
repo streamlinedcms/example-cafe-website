@@ -1,0 +1,47 @@
+---
+// The seasonal specials, in the shared "seasonal" group, shown on the home page and
+// the menu. Both pages use this component, so every item has the same fields on
+// both: a field shown on only one page would be blank on the other once the list
+// has been edited.
+const items = [
+    {
+        name: "Maple Cardamom Latte",
+        price: "6.25",
+        description: "Our house espresso with Oregon maple and a pinch of cardamom.",
+    },
+    {
+        name: "Smoked Honey Cortado",
+        price: "5.50",
+        description: "Equal parts espresso and milk, sweetened with local wildflower honey.",
+    },
+    {
+        name: "Harbor Fog",
+        price: "5.75",
+        description: "Earl Grey, vanilla and steamed milk. Our take on the London fog.",
+    },
+];
+---
+
+<div data-scms-group="seasonal">
+    <div class="space-y-5" data-scms-template="seasonal-items">
+        {items.map((item) => (
+            <div>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="font-serif text-xl font-medium" data-scms-text="name">
+                        {item.name}
+                    </h3>
+                    <span
+                        class="min-w-6 flex-1 -translate-y-1 border-b-2 border-dotted border-ink/30"
+                        aria-hidden="true"
+                    />
+                    <span class="inline-flex font-medium tabular-nums">
+                        $<span data-scms-text="price">{item.price}</span>
+                    </span>
+                </div>
+                <p class="mt-1 text-sm text-ink-soft" data-scms-text="description">
+                    {item.description}
+                </p>
+            </div>
+        ))}
+    </div>
+</div>

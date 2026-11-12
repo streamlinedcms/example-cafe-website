@@ -1,0 +1,91 @@
+---
+import { Icon } from "astro-icon/components";
+import { business, navLinks } from "../lib/business";
+
+const current = Astro.url.pathname;
+---
+
+<!-- Nothing in the header is editable: while someone is signed in, an editable link
+     opens the editor instead of its page, so the menu would stop working for them.
+     Menu labels are changed in src/lib/business.ts. -->
+<header class="sticky top-0 z-40 border-b border-ink/15 bg-paper/95 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+        <a href="/" class="flex items-center gap-3 text-ink">
+            <img src="/images/logo.svg" alt="" class="h-11 w-11" />
+            <span class="flex flex-col leading-none">
+                <span class="font-serif text-2xl font-semibold tracking-tight">Wrenwick</span>
+                <span class="label mt-1 text-[0.62rem] text-ink-soft">Roast House</span>
+            </span>
+            <span class="sr-only">{business.name}, home page</span>
+        </a>
+
+        <nav aria-label="Main" class="hidden md:block">
+            <ul class="flex items-center">
+                {navLinks.map((link) => (
+                    <li>
+                        <a
+                            href={link.href}
+                            class:list={[
+                                "label block px-4 py-3 text-[0.78rem] transition-colors hover:text-rust",
+                                current.startsWith(link.href) ? "text-rust" : "text-ink",
+                            ]}
+                            aria-current={current.startsWith(link.href) ? "page" : undefined}
+                        >
+                            {link.label}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+
+        <button
+            type="button"
+            class="-mr-2 p-2 text-ink md:hidden"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            data-menu-toggle
+        >
+            <span class="sr-only">Menu</span>
+            <Icon name="lucide:menu" class="h-6 w-6" data-icon-open />
+            <Icon name="lucide:x" class="hidden h-6 w-6" data-icon-close />
+        </button>
+    </div>
+
+    <nav id="mobile-menu" aria-label="Main" class="hidden border-t border-ink/15 md:hidden">
+        <ul class="mx-auto max-w-6xl px-5 py-2">
+            {navLinks.map((link) => (
+                <li>
+                    <a
+                        href={link.href}
+                        class="block py-3 font-serif text-2xl text-ink"
+                        aria-current={current.startsWith(link.href) ? "page" : undefined}
+                    >
+                        {link.label}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </nav>
+</header>
+
+<script>
+    const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const menu = document.getElementById("mobile-menu");
+    if (toggle && menu) {
+        const setOpen = (open: boolean) => {
+            toggle.setAttribute("aria-expanded", String(open));
+            menu.classList.toggle("hidden", !open);
+            toggle.querySelector("[data-icon-open]")?.classList.toggle("hidden", open);
+            toggle.querySelector("[data-icon-close]")?.classList.toggle("hidden", !open);
+        };
+        toggle.addEventListener("click", () =>
+            setOpen(toggle.getAttribute("aria-expanded") !== "true"),
+        );
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+                setOpen(false);
+                toggle.focus();
+            }
+        });
+    }
+</script>

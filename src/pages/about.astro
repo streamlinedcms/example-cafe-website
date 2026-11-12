@@ -1,0 +1,181 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Starting copy. Team photos are hands at work, not faces: the people are fictional,
+// so no real person is shown as one of them.
+const team = [
+    {
+        photo: "/images/pour-over.jpg",
+        name: "Maren",
+        role: "Owner & roaster",
+        note: "Drinks: Guji pour-over, black",
+    },
+    {
+        photo: "/images/milk-pour.jpg",
+        name: "Theo",
+        role: "Head barista",
+        note: "Drinks: a cortado, no sugar",
+    },
+    {
+        photo: "/images/country-bread.jpg",
+        name: "Priya",
+        role: "Baker",
+        note: "Drinks: chai, extra spice",
+    },
+    {
+        photo: "/images/latte-art-table.jpg",
+        name: "Sam",
+        role: "Barista",
+        note: "Drinks: whatever's seasonal",
+    },
+];
+---
+
+<Layout
+    title="About"
+    description="How a former fishing-supply store on Harbor Street became Wrenwick Roast House, and the small team that roasts, bakes and pours there."
+>
+    <main id="main" data-scms-group="page-about">
+        <section class="mx-auto max-w-6xl px-5 pt-12 pb-16 md:pt-20">
+            <p class="label text-rust" data-scms-text="label">
+                Our story
+            </p>
+            <h1
+                class="mt-4 max-w-4xl text-5xl leading-none font-semibold md:text-7xl"
+                data-scms-text="title"
+            >
+                A fishing-supply store, then a coffee roaster
+            </h1>
+        </section>
+
+        <!-- Story: a wide photo with the text set in a narrow column beside it -->
+        <section class="mx-auto grid max-w-6xl gap-10 px-5 pb-20 md:grid-cols-12">
+            <img
+                src="/images/shop-interior.jpg"
+                alt="The inside of the shop, with long wooden tables and the counter at the back"
+                class="aspect-[4/3] w-full object-cover md:col-span-7"
+                data-scms-image="story-image"
+            />
+            <div
+                class="prose-cafe text-lg leading-relaxed md:col-span-4 md:col-start-9"
+                data-scms-html="story"
+            >
+                <p>
+                    For forty years, 214 Harbor Street sold nets, rope and rain gear. When it closed
+                    in 2013, Maren Holt signed the lease with a secondhand roaster and a plan to
+                    sell coffee to the boats.
+                </p>
+                <p>
+                    The boats came, and so did everyone else. We opened the doors in 2014 and kept
+                    the old shelving, the plank floor and the bell over the door.
+                </p>
+                <p>
+                    We still roast in small batches, twice a week, in the room behind the counter.
+                    On roasting days you'll smell it from the harbor.
+                </p>
+            </div>
+        </section>
+
+        <!-- How we roast: three steps in order, so individual elements, not a list -->
+        <section class="kraft">
+            <div class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+                <h2
+                    class="max-w-xl text-4xl font-semibold md:text-5xl"
+                    data-scms-text="roast-title"
+                >
+                    How a bag of green beans becomes your cup
+                </h2>
+                <ol class="mt-12 grid gap-10 md:grid-cols-3">
+                    <li class="border-t-2 border-ink pt-5">
+                        <p class="label text-rust">Step one</p>
+                        <h3 class="mt-3 text-2xl font-medium italic" data-scms-text="step-1-title">
+                            We buy green
+                        </h3>
+                        <p class="mt-2 text-ink-soft" data-scms-text="step-1-body">
+                            Raw beans from three importers we've known for years, chosen by tasting
+                            a sample of each lot.
+                        </p>
+                    </li>
+                    <li class="border-t-2 border-ink pt-5">
+                        <p class="label text-rust">Step two</p>
+                        <h3 class="mt-3 text-2xl font-medium italic" data-scms-text="step-2-title">
+                            We roast small
+                        </h3>
+                        <p class="mt-2 text-ink-soft" data-scms-text="step-2-body">
+                            Twelve kilos at a time, every Tuesday and Friday, logged batch by batch
+                            so we can repeat the good ones.
+                        </p>
+                    </li>
+                    <li class="border-t-2 border-ink pt-5">
+                        <p class="label text-rust">Step three</p>
+                        <h3 class="mt-3 text-2xl font-medium italic" data-scms-text="step-3-title">
+                            We rest, then pour
+                        </h3>
+                        <p class="mt-2 text-ink-soft" data-scms-text="step-3-body">
+                            Each roast rests for a few days before it reaches the grinder, when it
+                            tastes its best.
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- The team, as snapshots: hands at work, with handwritten-style names -->
+        <section class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+            <div class="grid gap-6 md:grid-cols-12 md:items-end">
+                <h2
+                    class="text-4xl font-semibold md:col-span-6 md:text-5xl"
+                    data-scms-text="team-title"
+                >
+                    Behind the counter
+                </h2>
+                <p class="text-ink-soft md:col-span-5 md:col-start-8" data-scms-text="team-intro">
+                    Four of us, most mornings. Say hello.
+                </p>
+            </div>
+            <div
+                class="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4"
+                data-scms-template="team"
+            >
+                {team.map((person) => (
+                    <figure class="snapshot bg-white p-3 pb-5 shadow-[0_2px_10px_rgb(42_28_19/0.12)]">
+                        <img
+                            src={person.photo}
+                            alt="A member of the Wrenwick team at work"
+                            class="aspect-square w-full object-cover"
+                            data-scms-image="photo"
+                        />
+                        <figcaption class="mt-4 px-1">
+                            <p class="font-serif text-2xl font-medium italic" data-scms-text="name">
+                                {person.name}
+                            </p>
+                            <p class="label mt-1 text-rust" data-scms-text="role">
+                                {person.role}
+                            </p>
+                            <p class="mt-2 text-sm text-ink-soft" data-scms-text="note">
+                                {person.note}
+                            </p>
+                        </figcaption>
+                    </figure>
+                ))}
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    /* Snapshots sit at slight angles, from their position in the row, so every item in
+       the template has the same markup */
+    .snapshot:nth-of-type(4n + 1) {
+        rotate: -1.5deg;
+    }
+    .snapshot:nth-of-type(4n + 2) {
+        rotate: 1deg;
+    }
+    .snapshot:nth-of-type(4n + 3) {
+        rotate: -0.5deg;
+    }
+    .snapshot:nth-of-type(4n + 4) {
+        rotate: 1.5deg;
+    }
+</style>

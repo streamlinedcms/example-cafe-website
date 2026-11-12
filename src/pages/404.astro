@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Cloudflare Pages serves this for any address that doesn't exist, with a 404 status.
+// Without it, Pages would serve the home page instead, so broken links would look like
+// they work.
+---
+
+<Layout
+    title="Page not found"
+    description="That page doesn't exist on the Wrenwick Roast House website."
+>
+    <main id="main" data-scms-group="page-not-found">
+        <section class="mx-auto max-w-2xl px-5 py-24 text-center md:py-32">
+            <p class="label text-rust" data-scms-text="label">
+                Error 404
+            </p>
+            <h1 class="mt-4 text-5xl font-semibold md:text-6xl" data-scms-text="title">
+                We couldn't find that page
+            </h1>
+            <p class="mt-6 text-lg text-ink-soft" data-scms-text="body">
+                The link may be old, or the address may have a typo. The menu is a good place to
+                start.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-3">
+                <a
+                    href="/"
+                    class="bg-ink px-6 py-3 font-medium text-paper transition-colors hover:bg-rust"
+                    data-scms-href="home-link"
+                >
+                    <span data-scms-text="home-link-label">Go to the home page</span>
+                </a>
+                <a
+                    href="/menu/"
+                    class="border border-ink px-6 py-3 font-medium transition-colors hover:border-rust hover:text-rust"
+                    data-scms-href="menu-link"
+                >
+                    <span data-scms-text="menu-link-label">See the menu</span>
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>
