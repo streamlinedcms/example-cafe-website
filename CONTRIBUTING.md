@@ -24,12 +24,8 @@ uploading from a laptop would skip those checks.
 | ------------------------ | ---------------------------------------- | --------------------------------- |
 | Branch                   | `develop`                                | `master`                          |
 | Cloudflare Pages project | `example-cafe-website-staging`           | `example-cafe-website-live`       |
-| Address                  | https://cafe-staging.streamlinedcms.com  | https://cafe.streamlinedcms.com   |
+| Address                  | https://cafe.staging.streamlinedcms.com  | https://cafe.streamlinedcms.com   |
 | GitHub environment       | `staging`                                | `production`                      |
-
-Staging is `cafe-staging`, not `staging.cafe`: Cloudflare's free certificate for
-`streamlinedcms.com` covers one level of subdomain, so a second level wouldn't load over
-HTTPS.
 
 ### One-time setup
 
@@ -43,7 +39,7 @@ CLOUDFLARE_API_TOKEN=<personal token> npx wrangler pages project create example-
 CLOUDFLARE_API_TOKEN=<personal token> npx wrangler pages project create example-cafe-website-live --production-branch master
 ```
 
-Then attach the custom domains in each project's settings: `cafe-staging.streamlinedcms.com`
+Then attach the custom domains in each project's settings: `cafe.staging.streamlinedcms.com`
 on staging and `cafe.streamlinedcms.com` on live.
 
 **GitHub environments.** `staging` and `production` each need a `CLOUDFLARE_ACCOUNT_ID`

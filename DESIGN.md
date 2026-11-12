@@ -58,5 +58,6 @@ layout and typography, not interactive effects: everything is static.
   is fictional, and an embed would load Google's scripts for every visitor.
 - **2026-11-11:** No structured data (JSON-LD) for a local business, so search engines don't
   list a café that doesn't exist.
-- **2026-11-11:** Staging is `cafe-staging.streamlinedcms.com`, because Cloudflare's free
-  certificate doesn't cover a second-level subdomain like `staging.cafe`.
+- **2026-11-12:** Staging is `cafe.staging.streamlinedcms.com`, following the
+  `<site>.staging.<domain>` convention. Pages issues its own certificate for each custom
+  domain, so the second level of subdomain is fine.
