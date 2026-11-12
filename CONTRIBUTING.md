@@ -20,12 +20,16 @@ staging, and every push to `master` deploys the live site, so `master` only chan
 a pull request from `develop`, after the CI checks pass. There are no `deploy` npm scripts:
 uploading from a laptop would skip those checks.
 
-|                          | Staging                                  | Live                              |
-| ------------------------ | ---------------------------------------- | --------------------------------- |
-| Branch                   | `develop`                                | `master`                          |
-| Cloudflare Pages project | `example-cafe-website-staging`           | `example-cafe-website-live`       |
-| Address                  | https://cafe.staging.streamlinedcms.com  | https://cafe.streamlinedcms.com   |
-| GitHub environment       | `staging`                                | `production`                      |
+|                          | Staging                                  | Live                                                              |
+| ------------------------ | ---------------------------------------- | ----------------------------------------------------------------- |
+| Branch                   | `develop`                                | `master`                                                          |
+| Cloudflare Pages project | `example-cafe-website-staging`           | `example-cafe-website-live`                                       |
+| Address                  | https://cafe.staging.streamlinedcms.com  | https://wrenwickroasthouse.com, also https://cafe.streamlinedcms.com |
+| GitHub environment       | `staging`                                | `production`                                                      |
+
+The live site answers at both addresses, but `wrenwickroasthouse.com` is the main one:
+`PUBLIC_SITE_URL` in `.env.production` names it, so canonical links and link previews
+always use it, whichever address someone shared.
 
 ### One-time setup
 
@@ -40,7 +44,10 @@ CLOUDFLARE_API_TOKEN=<personal token> npx wrangler pages project create example-
 ```
 
 Then attach the custom domains in each project's settings: `cafe.staging.streamlinedcms.com`
-on staging and `cafe.streamlinedcms.com` on live.
+on staging; `wrenwickroasthouse.com`, `www.wrenwickroasthouse.com` and
+`cafe.streamlinedcms.com` on live. Add a redirect rule on the `wrenwickroasthouse.com` zone
+sending `www` to the bare domain with a 301, so the site has one `www`-free address. (The
+site's own `_redirects` file can't do this: it only matches paths, not hostnames.)
 
 **GitHub environments.** `staging` and `production` each need a `CLOUDFLARE_ACCOUNT_ID`
 variable and a `CLOUDFLARE_API_TOKEN` secret, and `production` only deploys from `master`:

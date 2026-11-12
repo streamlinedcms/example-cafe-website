@@ -9,7 +9,7 @@ script tag to the page's `<head>` and a few `data-scms-*` attributes to the part
 be edited. With those, the owner changes the menu, prices, hours, events, team and photos
 right on the page, with no rebuild and no admin dashboard.
 
-See it live at https://cafe.streamlinedcms.com.
+See it live at https://wrenwickroasthouse.com.
 
 ## Try it with your own Streamlined CMS app
 

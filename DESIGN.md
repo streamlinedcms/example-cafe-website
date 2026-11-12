@@ -64,6 +64,12 @@ layout and typography, not interactive effects: everything is static.
   Every page has a noindex tag and every response an `X-Robots-Tag: noindex` header, and
   `robots.txt` still lets crawlers in, since a blocked crawler never sees the noindex.
   There's no sitemap.
+- **2026-11-12:** The live site's main address is `wrenwickroasthouse.com`, so in the videos
+  it reads as an ordinary business site on its own domain, not something hosted by
+  Streamlined CMS. It's also served at `cafe.streamlinedcms.com`, a short address for
+  Streamlined CMS's own marketing, but canonical links and link previews always name
+  `wrenwickroasthouse.com`. With every page kept out of search results, serving both
+  doesn't create duplicate listings.
 - **2026-11-12:** Staging is `cafe.staging.streamlinedcms.com`, following the
   `<site>.staging.<domain>` convention. Pages issues its own certificate for each custom
   domain, so the second level of subdomain is fine.
