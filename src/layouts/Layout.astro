@@ -7,7 +7,7 @@ import "@fontsource-variable/fraunces/full-italic.css";
 import "@fontsource-variable/inter";
 import "../styles/global.css";
 import { PUBLIC_SCMS_API_URL, PUBLIC_SCMS_APP_ID, PUBLIC_SCMS_SDK_URL } from "astro:env/client";
-import { absoluteUrl, isStaging } from "../lib/site";
+import { absoluteUrl } from "../lib/site";
 import { business } from "../lib/business";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -18,8 +18,6 @@ interface Props {
     // Shown when the page is shared; path under public/
     image?: string;
     imageAlt?: string;
-    // Keeps a page out of search results, e.g. the 404 page
-    noindex?: boolean;
 }
 
 const cmsContentUrl = `${PUBLIC_SCMS_API_URL}/apps/${PUBLIC_SCMS_APP_ID}/content`;
@@ -45,7 +43,6 @@ const {
     description,
     image = "/images/social-card-2026-11.jpg",
     imageAlt = "Wrenwick Roast House, a small coffee roaster on Harbor Street",
-    noindex = false,
 } = Astro.props;
 const pageTitle = title === business.name ? title : `${title} | ${business.name}`;
 const pageUrl = absoluteUrl(Astro.url.pathname);
@@ -58,7 +55,9 @@ const pageUrl = absoluteUrl(Astro.url.pathname);
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={description} />
         <link rel="canonical" href={pageUrl} />
-        {(isStaging || noindex) && <meta name="robots" content="noindex, nofollow" />}
+        <!-- The café is fictional, so no page should turn up in search results, where it
+             could pass for a real business. Link previews still work. -->
+        <meta name="robots" content="noindex" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={business.name} />
         <meta property="og:title" content={pageTitle} />

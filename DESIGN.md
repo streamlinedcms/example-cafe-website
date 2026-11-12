@@ -58,6 +58,12 @@ layout and typography, not interactive effects: everything is static.
   is fictional, and an embed would load Google's scripts for every visitor.
 - **2026-11-11:** No structured data (JSON-LD) for a local business, so search engines don't
   list a café that doesn't exist.
+- **2026-11-12:** No page is indexed by search engines, on the live site as well as
+  staging: someone searching for a café shouldn't find a convincing fake one. People
+  reach the site from the videos, Streamlined CMS's own site and the GitHub repo instead.
+  Every page has a noindex tag and every response an `X-Robots-Tag: noindex` header, and
+  `robots.txt` still lets crawlers in, since a blocked crawler never sees the noindex.
+  There's no sitemap.
 - **2026-11-12:** Staging is `cafe.staging.streamlinedcms.com`, following the
   `<site>.staging.<domain>` convention. Pages issues its own certificate for each custom
   domain, so the second level of subdomain is fine.

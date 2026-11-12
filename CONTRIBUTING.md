@@ -103,7 +103,7 @@ committed.
 ## File Structure
 
 - `src/pages/`: one file per page (`menu.astro` is `/menu/`), plus `404.astro`,
-  `robots.txt.ts` and `sitemap.xml.ts`
+  `robots.txt.ts`
 - `src/layouts/Layout.astro`: the page shell: meta tags, fonts, the CMS script, the header
   and footer
 - `src/components/`: the header, footer, and the pieces used on more than one page

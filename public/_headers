@@ -1,7 +1,10 @@
-# Security headers Cloudflare Pages adds to every response. None of them change how
-# the site looks or works: no sniffing file types, no full addresses sent to other
-# sites, and no access to the camera, microphone, location, payments or USB.
+# Headers Cloudflare Pages adds to every response. None of them change how the site
+# looks or works: no sniffing file types, no full addresses sent to other sites, and no
+# access to the camera, microphone, location, payments or USB. X-Robots-Tag keeps
+# everything, photos included, out of search results: the café is fictional (see
+# DESIGN.md).
 /*
+  X-Robots-Tag: noindex
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
