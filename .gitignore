@@ -3,7 +3,7 @@ dist/
 .astro/
 .wrangler/
 
-# .env holds secrets - never commit it. .env.production and .env.staging hold
-# only public values (PUBLIC_*, which end up in the built pages anyway), so they
-# are committed on purpose.
-.env
+# Secrets (Cloudflare credentials) go in .env.local, which is never committed. .env,
+# .env.production and .env.staging hold only public values (PUBLIC_*, which end up in
+# the built pages anyway), so they are committed on purpose.
+.env.local

@@ -7,9 +7,10 @@ export default defineConfig({
     // server uses the same form
     trailingSlash: "always",
     integrations: [icon()],
-    // Public settings from .env.production (builds) or .env.staging (staging builds and
-    // the dev server). Each is required, so a missing one stops the build instead of
-    // shipping a site nobody can sign in to or that links to the wrong address.
+    // Public settings: the CMS app and SDK from .env (every build), the site's address from
+    // .env.production (builds) or .env.staging (staging builds and the dev server). Each is
+    // required, so a missing one stops the build instead of shipping a site nobody can sign
+    // in to or that links to the wrong address.
     env: {
         schema: {
             PUBLIC_SITE_URL: envField.string({ context: "client", access: "public", url: true }),

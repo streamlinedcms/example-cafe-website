@@ -63,30 +63,46 @@ gh secret set CLOUDFLARE_API_TOKEN --env production
 ```
 
 **Streamlined CMS app.** Create the app at [app.streamlinedcms.com](https://app.streamlinedcms.com),
-and put its App ID in `PUBLIC_SCMS_APP_ID` in both `.env.production` and `.env.staging`.
-Until it's there, every build stops and names the missing value. Editing on the live domain
+and put its App ID in `PUBLIC_SCMS_APP_ID` in `.env`. Until it's there, every build stops
+and names the missing value. Editing on the live domain
 needs the app on a paid plan; the free plan only works on `localhost`.
 
 ### Emergency manual deploy
 
 Only for when GitHub Actions is unavailable. It skips the pull request and the CI checks, so
 build from a clean, up-to-date checkout of the right branch. It needs
-`CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` in `.env` (see `.env.example`).
+`CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` in `.env.local` (see `.env.local.example`).
 
 ```bash
 git switch master && git pull
 npm ci && npm run build
-set -a; . ./.env; set +a
+set -a; . ./.env.local; set +a
 npx wrangler pages deploy dist --project-name example-cafe-website-live --branch master
 ```
 
 For staging, use `develop`, build with `npx astro build --mode staging`, and deploy to
 `example-cafe-website-staging` with `--branch develop`.
 
-Use the credentials in `.env`, not a token already set in your shell, which may be
+Use the credentials in `.env.local`, not a token already set in your shell, which may be
 read-only. Always pass `--branch` with the project's production branch: without it,
 Wrangler uses the current git branch, and the upload can land on a preview address while
 the site stays unchanged.
+
+## Settings
+
+The site's public settings are in committed files, since they end up in the built pages
+anyway, and each is named `PUBLIC_*` to say so:
+
+- `.env`: the Streamlined CMS app ID and the SDK and API addresses. Every build reads it:
+  the live site, staging and the dev server all use the same app.
+- `.env.production` and `.env.staging`: only the site's address (`PUBLIC_SITE_URL`), which
+  is the one thing that differs. `npm run build` reads `.env.production`;
+  `astro build --mode staging` and `npm run dev` read `.env.staging`.
+
+Each setting is declared as required in `env.schema` in `astro.config.js`, so a missing one
+stops the build with its name. Read them from `astro:env/client`. Secrets (only the
+Cloudflare credentials for an emergency deploy) go in `.env.local`, which is never
+committed.
 
 ## File Structure
 

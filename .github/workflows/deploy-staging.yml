@@ -21,7 +21,7 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
-            # --mode staging loads .env.staging instead of .env.production
+            # --mode staging takes the site's address from .env.staging instead of .env.production
             - name: Build
               run: npx astro build --mode staging
 
