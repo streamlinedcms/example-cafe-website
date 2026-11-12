@@ -1,0 +1,32 @@
+name: Deploy Staging
+
+on:
+    push:
+        branches: [develop]
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        environment: staging
+
+        steps:
+            - uses: actions/checkout@v7
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v7
+              with:
+                  node-version-file: .nvmrc
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci
+
+            # --mode staging loads .env.staging instead of .env.production
+            - name: Build
+              run: npx astro build --mode staging
+
+            - name: Deploy to Cloudflare Pages
+              run: npx wrangler pages deploy dist --project-name example-cafe-website-staging
+              env:
+                  CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+                  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

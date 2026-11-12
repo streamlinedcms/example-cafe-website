@@ -1,0 +1,258 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hours from "../components/Hours.astro";
+import SeasonalList from "../components/SeasonalList.astro";
+import { business } from "../lib/business";
+
+const testimonials = [
+    {
+        quote: "The Guji pour-over tastes like blueberries and honey. I didn't believe it until I tried it.",
+        name: "Dana, a regular since 2016",
+    },
+    {
+        quote: "Best cortado on the coast, and they remember your order by the second visit.",
+        name: "Luis, on his way to the docks",
+    },
+    {
+        quote: "We come for Friday music and stay for the cardamom buns. Every single week.",
+        name: "Ruth and Ali, Friday regulars",
+    },
+];
+---
+
+<Layout
+    title={business.name}
+    description="A small-batch coffee roaster and café on Harbor Street in Wrenwick, Oregon. House-roasted espresso, pour-overs, fresh pastries and music on Friday nights."
+>
+    <main id="main" data-scms-group="page-home">
+        <!-- Hero: the headline on the left, the roaster's photo on the right with a coffee
+             bag label laid over its corner -->
+        <section class="mx-auto grid max-w-6xl gap-10 px-5 pt-10 pb-16 md:grid-cols-12 md:pt-16">
+            <div class="md:col-span-6 md:pt-10">
+                <p class="label text-rust" data-scms-text="hero-label">
+                    Small-batch roaster · Wrenwick, Oregon
+                </p>
+                <h1
+                    class="mt-5 text-5xl leading-[1.02] font-semibold sm:text-6xl lg:text-7xl"
+                    data-scms-text="hero-title"
+                >
+                    Coffee roasted a block from the harbor.
+                </h1>
+                <p class="mt-6 max-w-md text-lg text-ink-soft" data-scms-text="hero-intro">
+                    We roast twice a week in the back of the shop and pour it up front. Come for a
+                    cup, stay for a cardamom bun.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <a
+                        href="/menu/"
+                        class="bg-ink px-6 py-3 font-medium text-paper transition-colors hover:bg-rust"
+                        data-scms-href="hero-primary"
+                    >
+                        <span data-scms-text="hero-primary-label">See the menu</span>
+                    </a>
+                    <a
+                        href="/visit/"
+                        class="border border-ink px-6 py-3 font-medium transition-colors hover:border-rust hover:text-rust"
+                        data-scms-href="hero-secondary"
+                    >
+                        <span data-scms-text="hero-secondary-label">Plan a visit</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative md:col-span-6">
+                <img
+                    src="/images/roasting-drum.jpg"
+                    alt="Freshly roasted beans tumbling out of the roaster's cooling tray"
+                    class="aspect-[4/5] w-full object-cover md:ml-auto md:w-[92%]"
+                    data-scms-image="hero-image"
+                />
+                <!-- The bag label. Positioned on this wrapper, never on the editables
+                     inside it, so it stays put while the page is being edited. -->
+                <div class="kraft relative mx-4 -mt-16 max-w-xs border border-ink/30 p-5 shadow-[6px_6px_0_rgb(42_28_19/0.12)] md:absolute md:bottom-10 md:left-0 md:mx-0 md:mt-0">
+                    <div class="border border-dashed border-ink/40 p-4">
+                        <p class="label text-ink-soft" data-scms-text="label-heading">
+                            On the roaster this week
+                        </p>
+                        <p
+                            class="mt-2 font-serif text-2xl leading-tight italic"
+                            data-scms-text="label-coffee"
+                        >
+                            Ethiopia Guji, washed
+                        </p>
+                        <p class="mt-2 text-sm text-ink-soft" data-scms-text="label-notes">
+                            Blueberry, honey, black tea
+                        </p>
+                        <p
+                            class="label mt-4 border-t border-ink/30 pt-3"
+                            data-scms-text="label-roasted"
+                        >
+                            Roasted Tuesdays &amp; Fridays
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seasonal specials: a printed card beside an offset photo -->
+        <section class="rule-double">
+            <div class="mx-auto grid max-w-6xl items-start gap-10 px-5 py-16 md:grid-cols-12 md:py-24">
+                <div class="md:col-span-5">
+                    <img
+                        src="/images/latte-pour.jpg"
+                        alt="A barista pouring a rosetta into a glass of espresso"
+                        class="aspect-[3/4] w-full object-cover"
+                        data-scms-image="seasonal-image"
+                    />
+                </div>
+                <div class="md:col-span-6 md:col-start-7 md:pt-12">
+                    <p class="label text-rust" data-scms-text="seasonal-label">
+                        On the board now
+                    </p>
+                    <h2
+                        class="mt-3 text-4xl font-semibold md:text-5xl"
+                        data-scms-text="seasonal-title"
+                    >
+                        Seasonal specials
+                    </h2>
+                    <div
+                        class="prose-cafe mt-4 max-w-md text-ink-soft"
+                        data-scms-html="seasonal-intro"
+                    >
+                        <p>
+                            A few drinks we only make while the weather turns. They change with the
+                            season, so try them while they're here.
+                        </p>
+                    </div>
+                    <div class="mt-10 border border-ink/25 bg-paper p-6 md:p-8">
+                        <SeasonalList />
+                    </div>
+                    <a
+                        href="/menu/"
+                        class="mt-6 inline-block py-2 font-medium text-rust-dark underline underline-offset-4 hover:text-rust"
+                        data-scms-href="seasonal-link"
+                    >
+                        <span data-scms-text="seasonal-link-label">The full menu</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What regulars say, set like till receipts -->
+        <section class="kraft">
+            <div class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+                <div class="grid gap-6 md:grid-cols-12 md:items-end">
+                    <h2
+                        class="text-4xl font-semibold md:col-span-5 md:text-5xl"
+                        data-scms-text="regulars-title"
+                    >
+                        From the regulars
+                    </h2>
+                    <p
+                        class="text-ink-soft md:col-span-5 md:col-start-8"
+                        data-scms-text="regulars-intro"
+                    >
+                        Overheard at the counter, written down with permission.
+                    </p>
+                </div>
+                <div
+                    class="receipts mt-12 grid items-start gap-8 md:grid-cols-3"
+                    data-scms-template="testimonials"
+                >
+                    {testimonials.map((item) => (
+                        <figure class="receipt bg-paper px-6 pt-6 pb-9">
+                            <p class="receipt-number label border-b border-dashed border-ink/40 pb-3 text-ink-soft" />
+                            <blockquote
+                                class="mt-4 font-serif text-xl leading-snug"
+                                data-scms-text="quote"
+                            >
+                                {item.quote}
+                            </blockquote>
+                            <figcaption class="mt-5 text-sm text-ink-soft" data-scms-text="name">
+                                {item.name}
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Hours and where to find us -->
+        <section>
+            <div class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-12 md:py-24">
+                <div class="md:col-span-5">
+                    <p class="label text-rust" data-scms-text="hours-label">
+                        Opening hours
+                    </p>
+                    <h2 class="mt-3 text-4xl font-semibold" data-scms-text="hours-title">
+                        The door's open early
+                    </h2>
+                    <Hours class="mt-8" />
+                </div>
+                <div class="md:col-span-6 md:col-start-7">
+                    <img
+                        src="/images/window-table.jpg"
+                        alt="A table by the front window with a French press and two cups"
+                        class="aspect-[4/3] w-full object-cover"
+                        data-scms-image="visit-image"
+                    />
+                    <div class="mt-6 flex flex-wrap items-end justify-between gap-6">
+                        <address
+                            class="font-serif text-2xl not-italic"
+                            data-scms-group="contact-details"
+                        >
+                            <span class="block" data-scms-text="street">
+                                {business.street}
+                            </span>
+                            <span class="block" data-scms-text="locality">
+                                {business.locality}
+                            </span>
+                        </address>
+                        <a
+                            href="/visit/"
+                            class="border border-ink px-5 py-3 font-medium transition-colors hover:border-rust hover:text-rust"
+                            data-scms-href="directions-link"
+                        >
+                            <span data-scms-text="directions-label">Directions &amp; parking</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The week's events in one line, pointing to the Events page -->
+        <section class="bg-sea text-paper">
+            <div class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-12 md:flex-row md:items-center md:justify-between">
+                <p class="max-w-2xl font-serif text-3xl leading-snug" data-scms-text="events-line">
+                    Thursday nights, tasting flights. Friday nights, live music.
+                </p>
+                <a
+                    href="/events/"
+                    class="shrink-0 border border-paper px-6 py-3 font-medium transition-colors hover:bg-paper hover:text-sea"
+                    data-scms-href="events-link"
+                >
+                    <span data-scms-text="events-link-label">What's on</span>
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    /* Each receipt gets its order number from its position, so every item in the
+       template has identical markup and a new one is numbered automatically */
+    .receipts {
+        counter-reset: receipt 141;
+    }
+    .receipt {
+        counter-increment: receipt;
+        /* A torn edge along the bottom of each receipt */
+        mask:
+            conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px
+                7px repeat-x,
+            linear-gradient(#000 0 0) top / 100% calc(100% - 7px) no-repeat;
+    }
+    .receipt-number::before {
+        content: "Order no. " counter(receipt);
+    }
+</style>

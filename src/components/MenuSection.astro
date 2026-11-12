@@ -1,0 +1,47 @@
+---
+// One section of the printed menu: a heading, then a list of items the owner can add
+// to, reorder and delete. `id` names the template and the heading's CMS IDs, so it
+// must be unique on the page and must not change once content has been saved.
+interface Item {
+    name: string;
+    price: string;
+    description: string;
+}
+interface Props {
+    id: string;
+    title: string;
+    note: string;
+    items: Item[];
+}
+const { id, title, note, items } = Astro.props;
+---
+
+<section class="break-inside-avoid">
+    <h2 class="font-serif text-3xl font-medium italic" data-scms-text={`${id}-title`}>
+        {title}
+    </h2>
+    <p class="label mt-2 text-ink-soft" data-scms-text={`${id}-note`}>
+        {note}
+    </p>
+    <div class="mt-6 space-y-5" data-scms-template={id}>
+        {items.map((item) => (
+            <div>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-lg font-semibold" data-scms-text="name">
+                        {item.name}
+                    </h3>
+                    <span
+                        class="min-w-6 flex-1 -translate-y-1 border-b-2 border-dotted border-ink/30"
+                        aria-hidden="true"
+                    />
+                    <span class="inline-flex font-medium tabular-nums">
+                        $<span data-scms-text="price">{item.price}</span>
+                    </span>
+                </div>
+                <p class="mt-0.5 text-sm text-ink-soft" data-scms-text="description">
+                    {item.description}
+                </p>
+            </div>
+        ))}
+    </div>
+</section>

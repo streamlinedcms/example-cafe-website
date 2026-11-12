@@ -1,0 +1,79 @@
+---
+import Stamp from "./Stamp.astro";
+import { business, navLinks } from "../lib/business";
+
+const currentYear = new Date().getFullYear();
+---
+
+<!-- The tagline is in the "company" group and the address and phone number in
+     "contact-details", the same groups the other pages use. The page links, the
+     copyright year and the note about this being an example site aren't editable. -->
+<footer class="mt-auto bg-ink text-paper">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-12">
+        <div class="md:col-span-5">
+            <Stamp class="mb-5 h-20 w-20 text-kraft" />
+            <p
+                class="max-w-xs font-serif text-2xl leading-snug italic"
+                data-scms-group="company"
+                data-scms-text="tagline"
+            >
+                Small-batch coffee, roasted a block from the harbor.
+            </p>
+        </div>
+
+        <div class="md:col-span-4" data-scms-group="contact-details">
+            <p class="label mb-4 text-kraft-deep">Find us</p>
+            <address class="not-italic">
+                <span class="block" data-scms-text="street">
+                    {business.street}
+                </span>
+                <span class="block" data-scms-text="locality">
+                    {business.locality}
+                </span>
+            </address>
+            <a
+                href={business.phone.href}
+                class="mt-3 inline-block py-1 hover:text-kraft"
+                data-scms-href="phone"
+            >
+                <span data-scms-text="phone-label">{business.phone.display}</span>
+            </a>
+        </div>
+
+        <nav aria-label="Footer" class="md:col-span-3">
+            <p class="label mb-4 text-kraft-deep">The shop</p>
+            <ul class="-my-1">
+                {navLinks.map((link) => (
+                    <li>
+                        <a href={link.href} class="block py-1 hover:text-kraft">
+                            {link.label}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="border-t border-paper/15">
+        <div class="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-sm text-paper/70 md:flex-row md:items-start md:justify-between">
+            <p class="max-w-2xl">
+                {business.name} is a fictional café. This is an example website for{" "}
+                <a
+                    href="https://streamlinedcms.com"
+                    class="underline hover:text-paper"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Streamlined CMS
+                </a>
+                : every word and photo on it can be edited right on the page.
+            </p>
+            <p class="shrink-0">
+                {`© ${currentYear} ${business.name} · `}
+                <a href="#" class="underline hover:text-paper" data-scms-signin>
+                    Sign in
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>

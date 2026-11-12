@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Starting copy. Once the list has been edited in the CMS, the CMS holds the events.
+const events = [
+    {
+        date: "Thu, Nov 19",
+        time: "6 – 8 pm",
+        title: "Tasting flight: three Ethiopians",
+        description:
+            "Taste the same country three ways, from bright and floral to deep and syrupy. Ten seats, so ask at the counter.",
+    },
+    {
+        date: "Fri, Nov 20",
+        time: "7 – 9 pm",
+        title: "Live: The Low Tide Trio",
+        description: "Soft jazz from three locals who met at our open mic. No cover charge.",
+    },
+    {
+        date: "Sat, Nov 21",
+        time: "9 – 11 am",
+        title: "Home brewing class",
+        description:
+            "Bring your own kettle or borrow ours. We'll cover grind, ratio and timing for pour-over and French press.",
+    },
+    {
+        date: "Fri, Nov 27",
+        time: "7 – 9 pm",
+        title: "Open mic night",
+        description: "Songs, poems and the occasional magic trick. Sign up from 6:30.",
+    },
+];
+---
+
+<Layout
+    title="Events"
+    description="Tasting flights, live music, home brewing classes and open mic nights at Wrenwick Roast House on Harbor Street."
+>
+    <main id="main" data-scms-group="page-events">
+        <section class="mx-auto max-w-6xl px-5 pt-12 pb-10 md:pt-20">
+            <div class="grid gap-8 md:grid-cols-12 md:items-end">
+                <div class="md:col-span-7">
+                    <p class="label text-rust" data-scms-text="label">
+                        What's on
+                    </p>
+                    <h1
+                        class="mt-4 text-5xl leading-none font-semibold md:text-7xl"
+                        data-scms-text="title"
+                    >
+                        Evenings at the roast house
+                    </h1>
+                </div>
+                <div
+                    class="prose-cafe text-ink-soft md:col-span-4 md:col-start-9"
+                    data-scms-html="intro"
+                >
+                    <p>
+                        After the morning rush, the chairs come off the tables and the shop turns
+                        into the town's living room. Everything here is free unless it says so.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mx-auto max-w-6xl px-5 pb-20">
+            <div class="grid gap-12 md:grid-cols-12">
+                <!-- The programme: one row per event, like a printed listing -->
+                <div class="md:col-span-8">
+                    <div class="rule-double" data-scms-template="events">
+                        {events.map((event) => (
+                            <article class="grid gap-3 border-b border-ink/25 py-8 sm:grid-cols-[11rem_1fr] sm:gap-8">
+                                <div>
+                                    <p
+                                        class="font-serif text-2xl font-semibold"
+                                        data-scms-text="date"
+                                    >
+                                        {event.date}
+                                    </p>
+                                    <p class="label mt-1 text-rust" data-scms-text="time">
+                                        {event.time}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h2
+                                        class="text-2xl leading-tight font-medium italic"
+                                        data-scms-text="title"
+                                    >
+                                        {event.title}
+                                    </h2>
+                                    <p class="mt-2 text-ink-soft" data-scms-text="description">
+                                        {event.description}
+                                    </p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+
+                <aside class="space-y-8 md:col-span-4">
+                    <img
+                        src="/images/trumpet.jpg"
+                        alt="A trumpet player in warm stage light"
+                        class="aspect-[4/5] w-full object-cover"
+                        data-scms-image="music-image"
+                    />
+                    <img
+                        src="/images/tasting-cups.jpg"
+                        alt="A circle of coffee cups set out for a tasting"
+                        class="aspect-square w-3/4 object-cover md:ml-auto"
+                        data-scms-image="tasting-image"
+                    />
+                    <div class="kraft border border-ink/25 p-6">
+                        <h2 class="text-2xl font-semibold" data-scms-text="host-title">
+                            Want to play or host?
+                        </h2>
+                        <p class="mt-2 text-ink-soft" data-scms-text="host-body">
+                            We love having local musicians and makers. Ask for Maren at the counter.
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+</Layout>

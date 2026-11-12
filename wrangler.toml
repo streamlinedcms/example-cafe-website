@@ -1,0 +1,4 @@
+# Deliberately unusable: every deploy names its project with --project-name, so one
+# that forgets fails instead of creating or overwriting the wrong project
+name = "should-not-use-this-name"
+pages_build_output_dir = "dist"

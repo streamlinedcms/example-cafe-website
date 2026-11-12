@@ -1,0 +1,163 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hours from "../components/Hours.astro";
+import { business } from "../lib/business";
+---
+
+<Layout
+    title="Visit"
+    description="Find Wrenwick Roast House at 214 Harbor Street, Wrenwick, Oregon. Opening hours, holiday hours, parking and directions."
+>
+    <main id="main" data-scms-group="page-visit">
+        <section class="mx-auto max-w-6xl px-5 pt-12 pb-12 md:pt-20">
+            <p class="label text-rust" data-scms-text="label">
+                Visit
+            </p>
+            <h1
+                class="mt-4 max-w-3xl text-5xl leading-none font-semibold md:text-7xl"
+                data-scms-text="title"
+            >
+                Down the hill, by the harbor
+            </h1>
+        </section>
+
+        <section class="mx-auto grid max-w-6xl gap-12 px-5 pb-20 md:grid-cols-12">
+            <!-- Address, phone and hours -->
+            <div class="md:col-span-5">
+                <div class="rule-double pt-6">
+                    <p class="label text-ink-soft" data-scms-text="address-label">
+                        Address
+                    </p>
+                    <address
+                        class="mt-2 font-serif text-3xl leading-tight not-italic"
+                        data-scms-group="contact-details"
+                    >
+                        <span class="block" data-scms-text="street">
+                            {business.street}
+                        </span>
+                        <span class="block" data-scms-text="locality">
+                            {business.locality}
+                        </span>
+                    </address>
+                    <p class="label mt-6 text-ink-soft" data-scms-text="phone-heading">
+                        Phone
+                    </p>
+                    <a
+                        href={business.phone.href}
+                        class="mt-1 inline-block py-1 text-xl font-medium hover:text-rust"
+                        data-scms-group="contact-details"
+                        data-scms-href="phone"
+                    >
+                        <span data-scms-text="phone-label">{business.phone.display}</span>
+                    </a>
+                </div>
+
+                <div class="mt-12">
+                    <h2 class="text-3xl font-semibold" data-scms-text="hours-title">
+                        Opening hours
+                    </h2>
+                    <Hours class="mt-6" />
+                </div>
+            </div>
+
+            <!-- A drawn map of the streets around the shop, and directions -->
+            <div class="md:col-span-6 md:col-start-7">
+                <figure class="kraft border border-ink/25 p-4">
+                    <svg
+                        viewBox="0 0 400 300"
+                        class="h-auto w-full text-ink"
+                        role="img"
+                        aria-labelledby="map-title"
+                    >
+                        <title id="map-title">
+                            Map: the shop is on Harbor Street, a block up from the harbor, between
+                            Mill Street and Ferry Street
+                        </title>
+                        <path
+                            d="M0,230 C60,215 110,250 170,236 C230,222 270,258 330,244 C360,237 385,242 400,238 L400,300 L0,300 Z"
+                            fill="var(--color-sea)"
+                            opacity="0.85"
+                        ></path>
+                        <g fill="none" stroke="currentColor" stroke-linecap="round">
+                            <path d="M10,170 L390,160" stroke-width="10" opacity="0.18"></path>
+                            <path d="M10,90 L390,80" stroke-width="6" opacity="0.14"></path>
+                            <path d="M120,20 L135,225" stroke-width="6" opacity="0.14"></path>
+                            <path d="M280,15 L292,220" stroke-width="6" opacity="0.14"></path>
+                            <path
+                                d="M60,235 L60,205 M200,236 L200,205 M330,244 L330,212"
+                                stroke-width="3"
+                                opacity="0.4"
+                            ></path>
+                        </g>
+                        <g
+                            fill="currentColor"
+                            font-family="Inter Variable, system-ui, sans-serif"
+                            font-size="9"
+                            letter-spacing="1.5"
+                            opacity="0.7"
+                        >
+                            <text x="16" y="155">
+                                HARBOR ST
+                            </text>
+                            <text x="16" y="76">
+                                HILL ST
+                            </text>
+                            <text x="140" y="40" transform="rotate(86 140 40)">
+                                MILL ST
+                            </text>
+                            <text x="298" y="36" transform="rotate(86 298 36)">
+                                FERRY ST
+                            </text>
+                        </g>
+                        <text
+                            x="300"
+                            y="282"
+                            fill="var(--color-paper)"
+                            font-family="Fraunces Variable, Georgia, serif"
+                            font-style="italic"
+                            font-size="16"
+                        >
+                            the harbor
+                        </text>
+                        <g transform="translate(212 150)">
+                            <circle r="15" fill="var(--color-rust)"></circle>
+                            <circle r="5" fill="var(--color-paper)"></circle>
+                        </g>
+                        <text
+                            x="232"
+                            y="138"
+                            fill="currentColor"
+                            font-family="Fraunces Variable, Georgia, serif"
+                            font-size="14"
+                            font-weight="600"
+                        >
+                            Wrenwick
+                        </text>
+                    </svg>
+                </figure>
+
+                <div class="prose-cafe mt-8 text-lg" data-scms-html="directions">
+                    <p>
+                        <strong>Walking from the harbor:</strong> head up Ferry Street and turn left
+                        onto Harbor Street. We're the green door after the bookshop.
+                    </p>
+                    <p>
+                        <strong>Parking:</strong> free on Harbor Street for two hours, and all day
+                        in the lot on Mill Street.
+                    </p>
+                    <p>
+                        <strong>Accessibility:</strong> a step-free entrance on Mill Street, and one
+                        accessible restroom.
+                    </p>
+                </div>
+
+                <img
+                    src="/images/coffee-beans.jpg"
+                    alt="A handful of dark roasted coffee beans"
+                    class="mt-10 aspect-[16/9] w-full object-cover"
+                    data-scms-image="beans-image"
+                />
+            </div>
+        </section>
+    </main>
+</Layout>
